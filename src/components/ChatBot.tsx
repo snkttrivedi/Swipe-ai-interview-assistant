@@ -4,7 +4,6 @@ import { Input, Button, Card, Typography, Avatar, Spin } from 'antd';
 import { ChatMessage } from '../types';
 import { useDispatch } from 'react-redux';
 import { addChatMessage } from '../store/slices/interviewSlice';
-import { AIService } from '../services/aiService';
 
 const { TextArea } = Input;
 const { Text, Title } = Typography;
@@ -26,7 +25,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
   const [isTyping, setIsTyping] = useState(false);
   const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const aiService = AIService.getInstance();
+  // Removed unused aiService instance (was previously created but not used)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -58,7 +57,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
   setMessages([welcomeMessage]);
   dispatch(addChatMessage(welcomeMessage));
     }
-  }, [missingFields, messages.length]);
+  }, [missingFields, messages.length, dispatch]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isTyping) return;

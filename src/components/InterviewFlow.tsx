@@ -37,7 +37,7 @@ const InterviewFlow: React.FC<InterviewFlowProps> = ({
 
   const currentQuestion = questions[currentQuestionIndex];
 
-  const submitAnswer = async (answer: string) => {
+  const submitAnswer = useCallback(async (answer: string) => {
     if (isSubmitting) return;
     
     setIsSubmitting(true);
@@ -84,11 +84,10 @@ const InterviewFlow: React.FC<InterviewFlowProps> = ({
       setIsSubmitting(false);
       setIsScoring(false);
     }
-  };
+  }, [isSubmitting, aiService, currentQuestion, currentQuestionIndex, questions.length, currentCandidate, onAnswerSubmit, onInterviewComplete, timeRemaining]);
 
   const handleTimeUp = useCallback(async () => {
     if (isSubmitting) return;
-    
     setIsSubmitting(true);
     await submitAnswer(currentAnswer || 'No answer provided');
   }, [isSubmitting, currentAnswer, submitAnswer]);

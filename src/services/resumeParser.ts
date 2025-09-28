@@ -1,5 +1,4 @@
 import mammoth from 'mammoth';
-import { DEMO_MODE, DEMO_RESUME_SCENARIOS } from '../config/demo';
 
 export interface ExtractedInfo {
   name?: string;
@@ -77,7 +76,7 @@ export const extractInfoFromText = (text: string): ExtractedInfo => {
     // Indian 10-digit format
     /\b(?:\+?91[-\s.]?)?([0-9]{10})\b/g,
     // Phone with labels
-    /(?:phone|mobile|cell|tel|contact|number)[:\s]*([+]?[0-9\s\-\(\)\.]{10,15})/gi,
+  /(?:phone|mobile|cell|tel|contact|number)[:\s]*([+]?[0-9\s().-]{10,15})/gi,
     // Simple digit groups
     /\b([0-9]{3}[-\s.]?[0-9]{3}[-\s.]?[0-9]{4})\b/g,
     /\b([0-9]{10,15})\b/g

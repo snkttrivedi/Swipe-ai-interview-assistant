@@ -2,6 +2,12 @@
 
 A React application that provides an AI-powered interview experience for both candidates and interviewers. Built as part of the Swipe Internship Assignment.
 
+## Live Demo & Video
+
+- Live Demo: https://swipe-ai-interview-assistant.vercel.app (update if different)
+- Demo Video: (link to 2–5 min walkthrough once recorded)
+
+
 ## Features
 
 ### For Interviewees
@@ -39,7 +45,7 @@ A React application that provides an AI-powered interview experience for both ca
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/snkttrivedi/Swipe-ai-interview-assistant.git
 cd ai-interview-assistant
 ```
 
@@ -167,6 +173,38 @@ All interview data is automatically saved to localStorage and restored when the 
 - Safari
 - Edge
 
+## Limitations (Current MVP)
+
+| Area | Current Behavior | Planned Improvement |
+|------|------------------|---------------------|
+| PDF Parsing | Stub returns empty string (forces chatbot collection) | Integrate real pdf parsing (server or web worker) |
+| Pause / Resume | UI pause only; timer not persisted mid-question | Persist remaining seconds & resume accurately |
+| Refresh Mid-Question | Timer restarts for current question | Store start timestamp & recompute remaining time |
+| Question Delivery | Separate interview panel (not chat-style) | Optional: unify into conversational flow |
+| AI Reliability | Falls back silently to heuristic if Gemini fails | Add user-visible badge / status indicator |
+| Scoring | Single-pass; no re-score option | Add re-evaluate trigger per answer |
+| Summary | Generated once at end | Support regeneration / variant summaries |
+| PDF vs DOCX | DOCX parsed via Mammoth; PDF placeholder | Add pdf-parse (server) or pdfjs (client) |
+
+> These constraints are acceptable for the internship assignment scope and intentionally prioritized for core flow completion first.
+
+## Deployment
+
+1. Set environment variable `GEMINI_API_KEY` in Vercel Project Settings (Production + Preview).
+2. (Optional) Add `REACT_APP_GEMINI_ENABLED=true` if you want a client-side feature flag.
+3. Push to `main`; Vercel auto-builds using `vercel.json` (static build + serverless functions under `/api`).
+4. Verify endpoints:
+   - `/api/gemini-generate-questions`
+   - `/api/gemini-score-answer`
+   - `/api/gemini-summary`
+5. Check browser console: fallback mode logs warning if Gemini not configured.
+
+## Security Notes
+
+- Gemini key is never exposed to the browser (only serverless functions reference `GEMINI_API_KEY`).
+- Frontend falls back gracefully without the key (static questions + heuristic scoring).
+- Do not commit a real `.env.local`; only the `.env.local.template` is tracked.
+
 ## Future Enhancements
 
 - Integration with real AI APIs (OpenAI, Claude)
@@ -188,10 +226,11 @@ All interview data is automatically saved to localStorage and restored when the 
 
 This project is part of the Swipe Internship Assignment.
 
-## Demo
+## Demo & Video
 
-A live demo is available at: [Demo URL]
+| Item | Status |
+|------|--------|
+| Live Demo | Deployed (update URL if custom domain used) |
+| Video | Pending recording |
 
-## Video Demo
-
-A 2-5 minute demo video showcasing the application features is available at: [Video URL]
+Add your final video link here once published.

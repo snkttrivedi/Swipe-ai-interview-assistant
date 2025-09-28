@@ -1,4 +1,5 @@
-﻿import axios from 'axios';
+﻿/* eslint-disable unicode-bom */
+import axios from 'axios';
 
 export interface InterviewQuestion {
   id: string;
