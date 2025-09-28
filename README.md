@@ -4,7 +4,7 @@ A React application that provides an AI-powered interview experience for both ca
 
 ## Live Demo & Video
 
-- Live Demo: https://swipe-ai-interview-assistant.vercel.app (update if different)
+- Live Demo: https://swipe-ai-interview-assistant-self.vercel.app/
 - Demo Video: (link to 2–5 min walkthrough once recorded)
 
 
@@ -230,7 +230,7 @@ This project is part of the Swipe Internship Assignment.
 
 | Item | Status |
 |------|--------|
-| Live Demo | Deployed (update URL if custom domain used) |
+| Live Demo | Deployed at https://swipe-ai-interview-assistant-self.vercel.app/ |
 | Video | Pending recording |
 
 Add your final video link here once published.
