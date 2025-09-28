@@ -1,26 +1,75 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { ConfigProvider, Layout, Tabs, Typography } from 'antd';
+import { UserOutlined, DashboardOutlined } from '@ant-design/icons';
+import { store, persistor } from './store';
+import IntervieweeTab from './components/IntervieweeTab';
+import InterviewerTab from './components/InterviewerTab';
 import './App.css';
 
-function App() {
+const { Header, Content } = Layout;
+const { Title } = Typography;
+
+const App: React.FC = () => {
+  const tabItems = [
+    {
+      key: 'interviewee',
+      label: (
+        <span>
+          <UserOutlined />
+          Interviewee
+        </span>
+      ),
+      children: <IntervieweeTab />,
+    },
+    {
+      key: 'interviewer',
+      label: (
+        <span>
+          <DashboardOutlined />
+          Interviewer Dashboard
+        </span>
+      ),
+      children: <InterviewerTab />,
+    },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: '#1890ff',
+              borderRadius: 6,
+            },
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Layout className="app-layout">
+            <Header className="app-header">
+              <div className="header-content">
+                <Title level={3} style={{ color: 'white', margin: 0 }}>
+                  AI-Powered Interview Assistant
+                </Title>
+                <Typography.Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                  Swipe Internship Assignment
+                </Typography.Text>
+              </div>
+            </Header>
+            <Content className="app-content">
+              <Tabs
+                defaultActiveKey="interviewee"
+                items={tabItems}
+                size="large"
+                className="main-tabs"
+              />
+            </Content>
+          </Layout>
+        </ConfigProvider>
+      </PersistGate>
+    </Provider>
   );
-}
+};
 
 export default App;
